@@ -6,10 +6,11 @@ import {
   Param,
   Delete,
   Put,
+  BadRequestException,
+  Req,
 } from '@nestjs/common';
 
 import { from, Observable } from 'rxjs';
-
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { productInterFace } from './product.interface';
 import { ProductsServivce } from './products.service';
@@ -17,6 +18,7 @@ import { ProductsServivce } from './products.service';
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsServivce) {}
+
   @Post()
   addProduct(
     @Body() ProductInterFace: productInterFace,

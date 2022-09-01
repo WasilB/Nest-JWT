@@ -1,17 +1,13 @@
 import { Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 
-export class productInterFace {
+export class userInterFace {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @CreateDateColumn({ nullable: true })
-  createdAt: Date;
-  @CreateDateColumn({ nullable: true })
-  UpdatedAt: Date;
   @Column()
-  title: string;
+  name: string;
   @Column()
-  description: string;
+  email: string;
   @Column()
-  price: number;
+  password: string;
 }

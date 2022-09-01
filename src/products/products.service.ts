@@ -1,7 +1,21 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  Next,
+  NotFoundException,
+  Req,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { create } from 'domain';
 import { from, identity, Observable } from 'rxjs';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import {
+  DeleteResult,
+  FindOneOptions,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
+import { Response, Request, NextFunction } from 'express';
 import { productEntity } from './product.entity';
 import { productInterFace } from './product.interface';
 
@@ -19,7 +33,7 @@ export class ProductsServivce {
   }
 
   getProducts(): Observable<productInterFace[]> {
-    return from(this.productRepository.find());
+    return from(this.productRepository.find({}));
   }
 
   updateProducts(
@@ -32,4 +46,13 @@ export class ProductsServivce {
   deleteProduct(id: string): Observable<DeleteResult> {
     return from(this.productRepository.delete(id));
   }
+
+  // async validateUser(@Req() request: Request, @Next() next) {
+  //   const cookie = request.cookies['jwt'];
+
+  //   const data = await this.jwtService.verifyAsync(cookie);
+  //   if (!data) {
+  //     throw new UnauthorizedException();
+  //   }
+  // }
 }
